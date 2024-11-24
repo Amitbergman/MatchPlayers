@@ -1,0 +1,11 @@
+FROM python:3.9
+
+COPY sub.py /app/sub.py
+
+WORKDIR /app
+
+RUN pip install redis
+
+ENV PYTHONUNBUFFERED=1
+
+CMD ["python", "sub.py"]
