@@ -22,7 +22,10 @@ def getGames():
     user_to_play = request.args.get('name')
     game = redis_client.get(user_to_play)
     if game:
-        return f"found a game: {user_to_play}:{game}"
+        redis_client.delete(user_to_play)
+        redis_client.delete(game)
+        print(f"cleared the cache and retuning game: {game}:{user_to_play}")
+        return f"found a game: {user_to_play}:{game} will be playing."
     return f"no games"
 
 if __name__ == '__main__':
